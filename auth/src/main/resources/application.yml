@@ -7,12 +7,9 @@ spring:
     password: 1290
     driver-class-name: com.mysql.cj.jdbc.Driver
   jpa:
-    database-platform: org.hibernate.dialect.MySQL8Dialect
-    properties:
-      hibernate:
-        dialect: org.hibernate.dialect.MySQL8Dialect
     hibernate:
       ddl-auto: update
+    show-sql: true
   main:
     allow-circular-references: true
 springdoc:
@@ -21,3 +18,9 @@ springdoc:
   swagger-ui:
     path: /swagger-ui.html
     enabled: true
+auth:
+  app:
+    jwtCookieName: auth
+    jwtSecret: 9ab67789df495410c1798fea3ccb00fb8816221312a10b4e00a874a7e4b46960cd8495067622053e6e6ad36addae12c4308921ad8ba01ab23ce2f5bfc1936691ce66bec658cca86526e52e6f337276e5900817fff24fbf04124c3d26a51b364966360da1b4b1eb0a6e6d99988fe21637cbbfb5b092e1ff2a894d658b422ff98ae57f16798286a1d3535052f4f81093a0a80dd3fcc2f6f3516d021f07f824ec809b5868bc439e578a4c82253c02abb0364412a3cc2a86845a91ad2a11285299a594c04815467df481d2a2a0af7f92a61456259ae79789ca4263ea83d017d85169464178dc34f044a2daafd5ad5e325dc7a55ce4cb7fdcfeba0c9c8d90f05a31e6
+    jwtExpirationMs: 96400000
+    jwtRefresh: 2592000000
