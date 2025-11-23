@@ -17,48 +17,48 @@ public class CarritoController {
 
     private final CarritoService carritoService;
 
-    @GetMapping
+    @GetMapping("/{usuarioId}")
     public ResponseEntity<CarritoResponse> obtenerCarritoActivo(
-            @RequestHeader("X-User-Id") Long usuarioId) {
+            @PathVariable Long usuarioId) {
         CarritoResponse carrito = carritoService.obtenerCarritoActivo(usuarioId);
         return ResponseEntity.ok(carrito);
     }
 
-    @PostMapping("/items")
+    @PostMapping("/{usuarioId}/items")
     public ResponseEntity<CarritoResponse> agregarProductoAlCarrito(
-            @RequestHeader("X-User-Id") Long usuarioId,
+            @PathVariable Long usuarioId,
             @Valid @RequestBody AgregarProductoRequest request) {
         CarritoResponse carrito = carritoService.agregarProductoAlCarrito(usuarioId, request);
         return ResponseEntity.status(HttpStatus.CREATED).body(carrito);
     }
 
-    @PutMapping("/items/{productoId}")
+    @PutMapping("/{usuarioId}/items/{productoId}")
     public ResponseEntity<CarritoResponse> actualizarCantidadProducto(
-            @RequestHeader("X-User-Id") Long usuarioId,
+            @PathVariable Long usuarioId,
             @PathVariable Long productoId,
             @RequestParam Integer cantidad) {
         CarritoResponse carrito = carritoService.actualizarCantidadProducto(usuarioId, productoId, cantidad);
         return ResponseEntity.ok(carrito);
     }
 
-    @DeleteMapping("/items/{productoId}")
+    @DeleteMapping("/{usuarioId}/items/{productoId}")
     public ResponseEntity<CarritoResponse> eliminarProductoDelCarrito(
-            @RequestHeader("X-User-Id") Long usuarioId,
+            @PathVariable Long usuarioId,
             @PathVariable Long productoId) {
         CarritoResponse carrito = carritoService.eliminarProductoDelCarrito(usuarioId, productoId);
         return ResponseEntity.ok(carrito);
     }
 
-    @DeleteMapping("/vaciar")
+    @DeleteMapping("/{usuarioId}/vaciar")
     public ResponseEntity<Void> vaciarCarrito(
-            @RequestHeader("X-User-Id") Long usuarioId) {
+            @PathVariable Long usuarioId) {
         carritoService.vaciarCarrito(usuarioId);
         return ResponseEntity.noContent().build();
     }
 
-    @PostMapping("/completar-compra")
+    @PostMapping("/{usuarioId}/completar-compra")
     public ResponseEntity<CarritoResponse> completarCompra(
-            @RequestHeader("X-User-Id") Long usuarioId) {
+            @PathVariable Long usuarioId) {
         CarritoResponse carrito = carritoService.completarCompra(usuarioId);
         return ResponseEntity.ok(carrito);
     }
